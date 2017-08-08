@@ -11,14 +11,16 @@ let state = {
 
 //How to state ingredient 1 - Reduce
 let array = [1, 5, 2, 6, 4]
-let startingSum = 0;
+let startingSum = [];
 
 let mashTogetherFunction = (currentRunningResult, nextNumber) => {
     //This is the sum of all previous numbers
     currentRunningResult;
 
     nextNumber;
-    return currentRunningResult + nextNumber
+    currentRunningResult.push('I am ' + nextNumber);
+    // return currentRunningResult * nextNumber
+    return currentRunningResult;
 }
 
 //We can use the reduce function to mash together everything in an array
@@ -48,6 +50,15 @@ let objects = [{
 },
 {
     name: "Joey",
+},
+{
+    name: "Joseph"
+},
+{
+    age: 9
+},
+{
+    petname: "Godzilla"
 }]
 
 let allObjectsCombined = objects.reduce((currentMash, nextObject) => {
@@ -68,14 +79,18 @@ allObjectsCombined;
 // These actions are put on an object that we call an action.  It has a type and then anything else it needs.
 
 let action = {
-    type: "update_age",
-    age: 10
+    type: "update_age", //what change we want to make
+    age: 10 //the payload, or the new value (if we must)
 }
+
 
 function reducer(state, action) {
     switch (action.type) {
         case "update_age":
-            return Object.assign({}, state, { age: action.age })
+            return Object.assign({}, state, { age: action.age }) //takes empty object, makes it a clone of state, 
+                                                               //then adds the new ones
+        case "update_cereal":
+            return Object.assign({}, state, { cereal: action.cereal })
     }
 }
 let state1 = reducer(allObjectsCombined, action)
@@ -97,29 +112,32 @@ function updateAge(age) {
     }
 }
 
-function reducer(state, action) {
-    switch (action.type) {
-        case "update_age":
-            return Object.assign({}, state, { age: action.age })
+function updateCereal(newCereal) {
+    return {
+        type: "update_cereal",
+        cereal: newCereal
     }
 }
-let ageAction = updateAge(12);
+
+function reducer(state, action) {
+    switch (action.type) {
+        case "update_cereal":
+            return Object.assign({}, state, { cereal: action.cereal });
+        case "update_age":
+            return Object.assign({}, state, { age: action.age });
+    }
+}
+let ageAction = updateAge(21);
 let state10 = reducer(allObjectsCombined, ageAction);
 state10;
+
+let cerealAction = updateCereal('Honey Bunches of Oats');
+let state11 = reducer(state10, cerealAction);
+state11;
 
 //Try it
 // 1. Change Joey's age to 13
 // 2. Create an action builder for update cereal and use it to update your state
-
-function reducer(state, action) {
-    switch (action.type) {
-        case "update_age":
-            return Object.assign({}, state, { age: action.age })
-    }
-}
-let ageAction2 = updateAge(12);
-let state10 = reducer(allObjectsCombined, ageAction2);
-state10;
 
 
 /*

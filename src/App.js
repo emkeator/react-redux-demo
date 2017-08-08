@@ -44,11 +44,11 @@ class App extends Component {
 }
 
 //Input function to get data from state
-function mapStateToProps(state) {
+function mapStateToProps(state) { //will get state from redux
   //state refers to the redux state
   if(!state) return {};
 
-  let {people, name} = state;
+  let {people, name} = state; //destructure these things that we want to go into props
 
   return { //This object gets mashed/merged into this.props
     people,

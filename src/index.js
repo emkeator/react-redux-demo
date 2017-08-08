@@ -15,7 +15,7 @@ import { Provider } from 'react-redux' //Notice react-redux, not redux.
 let topLevelComponentWithStore = ( 
     <Provider store={store}>
         <App />
-</Provider>)
+</Provider>) //if you want to use Browser Router, wrap it around provider
 
 ReactDOM.render(topLevelComponentWithStore, document.getElementById('root'));
 registerServiceWorker();
